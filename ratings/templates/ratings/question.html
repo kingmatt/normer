@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <title>Cognition Lab Norming Questions</title>
+</head>
+<body>
+  <div class="image">
+    <img src="{% static image_path %}" alt="Norming Image" />
+  </div>
+  <form action = "/question/{{ image_id }}" method="post">
+    {% csrf_token %}
+    <div class="fieldWrapper">
+      <input id="id_image" name="image" type="hidden" value="{{ image_id }}" />
+    </div>
+    <div class="fieldWrapper">
+      {{ form.name.errors }}
+      {{ form.name.label_tag }}
+      {{ form.name }}
+    </div>
+    <div class="fieldWrapper">
+      {{ form.recognizability.errors }}
+      {{ form.recognizability.label_tag }}
+      {{ form.recognizability }}
+    </div>
+    <div class="fieldWrapper">
+      {{ form.familiarity.errors }}
+      {{ form.familiarity.label_tag }}
+      {{ form.familiarity }}
+    </div>
+    <div class="fieldWrapper">
+      {{ form.pleasantness.errors }}
+      {{ form.pleasantness.label_tag }}
+      {{ form.pleasantness }}
+    </div>
+    <div class="fieldWrapper">
+      {{ form.complexity.errors }}
+      {{ form.complexity.label_tag }}
+      {{ form.complexity }}
+    </div>
+    <div class="fieldWrapper">
+      {{ form.memorability.errors }}
+      {{ form.memorability.label_tag }}
+      {{ form.memorability }}
+    </div>
+    <input class="button" type="submit" value="Next" />
+  </form>
+</body>
+</html>

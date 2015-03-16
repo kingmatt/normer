@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>Cognition Lab Survey</title>
+  </head>
+  <body>
+    <h1> Cognition Lab Survey </h1>
+
+    <div class="instructions">
+      <p>You will be shown a series of {{ total_images }} images. For each image, you will be asked to name the image and rank the image on several criteria. </p>
+      <p>For each trait, rate the image for how accurately the trait describes it on a scale of 1 to 5, with 1 being Not at All, and 5 being Extremely.</p>
+    </div>
+
+    {% if experiment_empty %}
+      <div class="empty_experiment"> Sorry, there are no images to rate at this time</div>
+    {% else %}
+      <div class="begin">
+       <a href="{% url 'ratings:question' first_image %}">Begin!</a>
+      </div>
+    {% endif %}
+  </body>
+</html>

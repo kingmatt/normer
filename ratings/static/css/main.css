@@ -1,0 +1,18 @@
+li {
+  margin: 0 20px;
+  display: inline;
+}
+
+input[type=text] {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.button {
+  margin-left: 250px;
+  font-size: 20px;
+}
+
+.errorlist {
+  color: red;
+}
