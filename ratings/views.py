@@ -6,6 +6,8 @@ from django.utils import timezone
 
 from ratings.models import Question, Subject
 from ratings.forms import QuestionForm
+from ipware.ip import get_ip
+from IPython import embed
 
 import logging
 import random
@@ -15,8 +17,10 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 
 def index(request):
-  # Make a new subject and a new test run
   subject = Subject()
+  ip = get_ip(request)
+  if ip is not None:
+    subject.ip_address = ip
   subject.save()
   request.session['subject_id'] = subject.id
 
@@ -34,14 +38,11 @@ def index(request):
   return render(request, 'ratings/index.html', {
     'first_image': first_image,
     'experiment_empty': False,
-    'total_images': request.session['total_images']
-    })
+    'total_images': request.session['total_images'],
+  })
 
 # This provides the basic survey form
 def question(request, image_id):
-
-  # No matter what, pop the next question off the stack
-
   if request.method == 'POST':
     form = QuestionForm(request.POST)
     # Check whether it's valid
@@ -78,6 +79,8 @@ def question(request, image_id):
         'image_path': image_id + '.jpg',
         'image_id': image_id,
         'images_left': len(request.session['image_order']), 
+        'subject_id': request.session['subject_id'],
+        'images': request.session['image_order']
         })
   else:
     image = image_id
@@ -87,6 +90,8 @@ def question(request, image_id):
       'image_path': str(image) + '.jpg',
       'image_id': image,
       'images_left': len(request.session['image_order']), 
+      'subject_id': request.session['subject_id'],
+      'images': request.session['image_order'],
       })
 
 def thanks(request):

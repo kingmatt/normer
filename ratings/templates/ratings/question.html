@@ -2,15 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
   <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <title>Cognition Lab Norming Questions</title>
 </head>
 <body>
   <div class="image">
     <img src="{% static image_path %}" alt="Norming Image" />
   </div>
+  <p style="display: none;"> {{ images }} </p>
+  <p style="display: none;"> {{ subject_id }} </p>
   <form action = "/question/{{ image_id }}" method="post">
     {% csrf_token %}
     <div class="fieldWrapper">

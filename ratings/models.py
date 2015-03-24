@@ -1,7 +1,14 @@
 from django.db import models
+from datetime import datetime, timedelta
+
+# Probably unnecessary, but I don't want to look this up and
+# might need to change this in a minute
+def default_create_time():
+  return datetime.now()
 
 class Subject(models.Model):
-  var = 1
+  created_at = models.DateTimeField(default=default_create_time)
+  ip_address = models.GenericIPAddressField(null=True)
 
 class Question(models.Model):
   # Images are now static files because fuck django
