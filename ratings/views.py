@@ -96,3 +96,6 @@ def question(request, image_id):
 
 def thanks(request):
   return render(request, 'ratings/thanks.html')
+
+def slideshow(request):
+  return render(request, 'ratings/slideshow.html')
