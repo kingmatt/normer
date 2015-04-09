@@ -99,3 +99,6 @@ def thanks(request):
 
 def slideshow(request):
   return render(request, 'ratings/slideshow.html')
+
+def slideshowb(request):
+  return render(request, 'ratings/slideshowb.html')
